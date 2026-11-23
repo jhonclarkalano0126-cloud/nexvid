@@ -1,810 +1,343 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
-
-:root {
-  font-family: "Inter", sans-serif;
-  color: #ffffff;
-  background: #080808;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  min-width: 320px;
-  background: #080808;
-  color: #ffffff;
-}
-
-button,
-input,
-select {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-.app {
-  min-height: 100vh;
-  overflow: hidden;
-  background: #080808;
-}
-
-/* NAVIGATION */
-
-.navbar {
-  height: 82px;
-  padding: 0 6%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #090909;
-  border-bottom: 1px solid #202020;
-  position: relative;
-  z-index: 5;
-}
-
-.logo {
-  border: none;
-  background: transparent;
-  color: #ffffff;
-  font-size: 29px;
-  font-weight: 900;
-  letter-spacing: -1.5px;
-}
-
-.logo span,
-.footer h2 span {
-  color: #ed1738;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.nav-links button {
-  background: transparent;
-  border: none;
-  color: #a5a5a5;
-  font-size: 14px;
-  font-weight: 600;
-  transition: color 0.2s;
-}
-
-.nav-links button:hover,
-.nav-links button.nav-active {
-  color: #ed1738;
-}
-
-/* HERO SECTION */
-
-.hero {
-  min-height: 490px;
-  padding: 90px 8%;
-  display: flex;
-  align-items: center;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.96), rgba(0, 0, 0, 0.58)),
-    linear-gradient(0deg, #080808 0%, transparent 45%),
-    url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1800&q=85")
-      center/cover no-repeat;
-}
-
-.hero-content {
-  max-width: 720px;
-}
-
-.hero-label,
-.section-label {
-  color: #ed1738;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  margin-bottom: 18px;
-}
-
-.hero h1 {
-  font-size: clamp(42px, 6vw, 72px);
-  line-height: 1.08;
-  font-weight: 900;
-  letter-spacing: -2.5px;
-}
-
-.hero h1 span {
-  color: #ed1738;
-}
-
-.hero-description {
-  max-width: 560px;
-  margin-top: 22px;
-  color: #c4c4c4;
-  font-size: 16px;
-  line-height: 1.8;
-}
-
-.hero-button {
-  margin-top: 30px;
-  padding: 14px 27px;
-  border: none;
-  border-radius: 7px;
-  background: #ed1738;
-  color: white;
-  font-size: 14px;
-  font-weight: 800;
-  transition: 0.2s;
-}
-
-.hero-button:hover {
-  background: #c90e2c;
-  transform: translateY(-2px);
-}
-
-/* MAIN CONTENT */
-
-.main-content {
-  width: 100%;
-  max-width: 1500px;
-  margin: auto;
-  padding: 65px 6% 90px;
-}
-
-.section-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 28px;
-}
-
-.section-label {
-  margin-bottom: 8px;
-}
-
-.section-top h2 {
-  font-size: clamp(24px, 4vw, 34px);
-  font-weight: 800;
-}
-
-/* REGION SELECTOR */
-
-.region-selector {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.region-selector label {
-  color: #aaa;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.region-selector select {
-  min-width: 155px;
-  padding: 11px 35px 11px 13px;
-  color: white;
-  background: #171717;
-  border: 1px solid #383838;
-  border-radius: 7px;
-  outline: none;
-  font-size: 13px;
-}
-
-.region-selector select:focus {
-  border-color: #ed1738;
-}
-
-/* SEARCH */
-
-.search-box {
-  width: 100%;
-  max-width: 550px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 16px;
-  margin-bottom: 27px;
-  background: #151515;
-  border: 1px solid #303030;
-  border-radius: 8px;
-  transition: border 0.2s;
-}
-
-.search-box:focus-within {
-  border-color: #ed1738;
-}
-
-.search-box .search-icon {
-  width: 22px;
-  height: 22px;
-  flex: 0 0 22px;
-  color: #ed1738;
-}
-
-.search-icon svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.search-box input {
-  width: 100%;
-  height: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  color: white;
-  font-size: 14px;
-}
-
-.search-box input::placeholder {
-  color: #777;
-}
-
-/* REFRESH STATUS */
-
-.refresh-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  margin: -8px 0 22px;
-}
-
-.updated-label {
-  color: #999;
-  font-size: 12px;
-}
-
-.refresh-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 38px;
-  padding: 9px 14px;
-  border: 1px solid #ed1738;
-  border-radius: 7px;
-  background: #171717;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  transition: background 0.2s, opacity 0.2s;
-}
-
-.refresh-button:hover:not(:disabled) {
-  background: #ed1738;
-}
-
-.refresh-button:disabled {
-  cursor: wait;
-  opacity: 0.6;
-}
-
-.refresh-button svg {
-  width: 17px;
-  height: 17px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* CATEGORIES */
-
-.categories {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  overflow-x: auto;
-  padding-bottom: 14px;
-  margin-bottom: 27px;
-  scrollbar-width: thin;
-  scrollbar-color: #333 transparent;
-}
-
-.category {
-  flex-shrink: 0;
-  padding: 10px 19px;
-  border: 1px solid #333;
-  border-radius: 30px;
-  background: #171717;
-  color: #c5c5c5;
-  font-size: 13px;
-  font-weight: 600;
-  transition: 0.2s;
-}
-
-.category:hover {
-  border-color: #ed1738;
-  color: white;
-}
-
-.category.selected {
-  background: #ed1738;
-  border-color: #ed1738;
-  color: white;
-}
-
-/* VIDEO GRID */
-
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px 22px;
-}
-
-.video-card {
-  min-width: 0;
-  overflow: hidden;
-  background: #111111;
-  border: 1px solid #242424;
-  border-radius: 12px;
-  transition: transform 0.25s, border-color 0.25s;
-}
-
-.video-card:hover {
-  transform: translateY(-5px);
-  border-color: #ed1738;
-}
-
-.thumbnail {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background-color: #202020;
-  background-position: center;
-  background-size: cover;
-  overflow: hidden;
-}
-
-.thumbnail::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), transparent 55%);
-  pointer-events: none;
-}
-
-.play-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 2;
-  width: 55px;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translate(-50%, -50%);
-  border: 2px solid white;
-  border-radius: 50%;
-  background: rgba(237, 23, 56, 0.9);
-  color: white;
-  transition: 0.2s;
-}
-
-.play-icon svg {
-  width: 23px;
-  height: 23px;
-  fill: currentColor;
-  margin-left: 3px;
-}
-
-.play-icon:hover {
-  background: #ed1738;
-  transform: translate(-50%, -50%) scale(1.12);
-}
-
-.heart {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 3;
-  width: 37px;
-  height: 37px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.65);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.2s;
-}
-
-.heart svg {
-  width: 19px;
-  height: 19px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.heart.favorited svg {
-  fill: currentColor;
-}
-
-.heart:hover,
-.heart.favorited {
-  color: #ed1738;
-  border-color: #ed1738;
-}
-
-/* VIDEO INFORMATION */
-
-.video-info {
-  padding: 15px;
-}
-
-.video-category {
-  display: inline-block;
-  margin-bottom: 8px;
-  color: #ed1738;
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.video-info h3 {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  color: #f4f4f4;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.5;
-}
-
-.video-info p {
-  margin-top: 8px;
-  color: #858585;
-  font-size: 12px;
-}
-
-/* LOADING, ERROR AND EMPTY STATES */
-
-.status-message,
-.empty-message,
-.error-message {
-  min-height: 190px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 12px;
-  color: #aaa;
-}
-
-.status-message p,
-.empty-message p,
-.error-message p {
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.empty-message h3,
-.error-message h3 {
-  color: white;
-  font-size: 21px;
-}
-
-.error-message button {
-  padding: 11px 22px;
-  border: none;
-  border-radius: 6px;
-  background: #ed1738;
-  color: white;
-  font-weight: 700;
-}
-
-.error-note {
-  max-width: 420px;
-  color: #777;
-  font-size: 12px !important;
-}
-
-.loader {
-  width: 38px;
-  height: 38px;
-  border: 4px solid #333;
-  border-top-color: #ed1738;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* FOOTER */
-
-.footer {
-  padding: 45px 20px;
-  text-align: center;
-  background: #101010;
-  border-top: 1px solid #242424;
-}
-
-.footer h2 {
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: -1px;
-}
-
-.footer p {
-  margin-top: 10px;
-  color: #aaa;
-  font-size: 13px;
-}
-
-.footer small {
-  display: block;
-  margin-top: 20px;
-  color: #666;
-  font-size: 11px;
-  line-height: 1.6;
-}
-
-/* VIDEO PLAYER */
-
-.player-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.92);
-}
-
-.player-modal {
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  padding: 25px;
-  background: #151515;
-  border: 1px solid #333;
-  border-radius: 13px;
-}
-
-.player-modal h2 {
-  max-width: 90%;
-  margin-bottom: 18px;
-  color: white;
-  font-size: 19px;
-  line-height: 1.5;
-}
-
-.close-player {
-  position: absolute;
-  top: 13px;
-  right: 15px;
-  width: 36px;
-  height: 36px;
-  border: 1px solid #444;
-  border-radius: 50%;
-  background: #252525;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.close-player svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-}
-
-.close-player:hover {
-  background: #ed1738;
-  border-color: #ed1738;
-}
-
-.player-frame {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: black;
-  border-radius: 8px;
-}
-
-.player-frame iframe {
-  width: 100%;
-  height: 100%;
-  display: block;
-  border: none;
-}
-
-.player-channel {
-  margin-top: 14px;
-  color: #aaa;
-  font-size: 13px;
-}
-
-/* TABLET */
-
-@media (max-width: 900px) {
-  .video-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+import { useEffect, useState } from 'preact/hooks'
+import './app.css'
+
+const regions = [
+  { name: 'Philippines', code: 'PH' },
+  { name: 'Worldwide', code: '' },
+  { name: 'United States', code: 'US' },
+  { name: 'Japan', code: 'JP' },
+  { name: 'South Korea', code: 'KR' },
+  { name: 'Taiwan', code: 'TW' },
+  { name: 'United Kingdom', code: 'GB' },
+  { name: 'Canada', code: 'CA' },
+  { name: 'Australia', code: 'AU' }
+]
+
+const categories = [
+  'All', 'Movies', 'Music', 'Gaming', 'Sports', 'News', 'Technology',
+  'Education', 'Documentary', 'Entertainment'
+]
+
+const categoryMap = {
+  '1': 'Movies', '2': 'Entertainment', '10': 'Music', '15': 'Entertainment',
+  '17': 'Sports', '18': 'Movies', '19': 'Entertainment', '20': 'Gaming',
+  '22': 'Entertainment', '23': 'Entertainment', '24': 'Entertainment',
+  '25': 'News', '26': 'Education', '27': 'Education', '28': 'Technology',
+  '29': 'Documentary', '30': 'Movies', '35': 'Documentary'
+}
+
+const REFRESH_INTERVAL = 30 * 60 * 1000
+
+const decodeHtmlEntities = value => {
+  const textarea = document.createElement('textarea')
+  textarea.innerHTML = value || ''
+  return textarea.value
+}
+
+function App() {
+  const [youtubeVideos, setYoutubeVideos] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const [search, setSearch] = useState('')
+  const [category, setCategory] = useState('All')
+  const [favorites, setFavorites] = useState([])
+  const [page, setPage] = useState('Home')
+  const [region, setRegion] = useState('PH')
+  const [selectedVideo, setSelectedVideo] = useState(null)
+  const [refreshToken, setRefreshToken] = useState(0)
+  const [lastUpdated, setLastUpdated] = useState(null)
+
+  useEffect(() => {
+    let cancelled = false
+    let refreshTimer
+    let searchTimer
+
+    async function getApiKey() {
+      const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY
+      if (!apiKey) {
+        throw new Error('YouTube API key is missing. Please check your environment variable.')
+      }
+      return apiKey
+    }
+
+    async function fetchTrending() {
+      setLoading(true)
+      setError('')
+
+      try {
+        const apiKey = await getApiKey()
+        // Ask YouTube for recently published videos so refresh can surface newer uploads.
+        const params = new URLSearchParams({
+          part: 'snippet',
+          type: 'video',
+          order: 'date',
+          maxResults: '24',
+          publishedAfter: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+          key: apiKey,
+          _refresh: String(Date.now())
+        })
+        if (region) params.set('regionCode', region)
+
+        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?${params}`, {
+          cache: 'no-store'
+        })
+        const data = await response.json()
+        if (!response.ok) throw new Error(data.error?.message || 'Unable to load recent YouTube videos.')
+
+        const results = (data.items || [])
+          .filter(item => item.id?.videoId)
+          .map(item => ({
+            id: item.id.videoId,
+            youtubeId: item.id.videoId,
+            title: decodeHtmlEntities(item.snippet.title),
+            channel: decodeHtmlEntities(item.snippet.channelTitle),
+            category: 'Entertainment',
+            image: item.snippet.thumbnails.high?.url || item.snippet.thumbnails.medium?.url || item.snippet.thumbnails.default?.url,
+            views: '0'
+          }))
+
+        if (!cancelled) {
+          setYoutubeVideos(results)
+          setLastUpdated(new Date())
+        }
+      } catch (err) {
+        if (!cancelled) setError(err.message || 'Something went wrong.')
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+
+    async function fetchSearchResults(query) {
+      setLoading(true)
+      setError('')
+
+      try {
+        const apiKey = await getApiKey()
+        const params = new URLSearchParams({
+          part: 'snippet',
+          type: 'video',
+          q: query,
+          maxResults: '24',
+          order: 'relevance',
+          safeSearch: 'moderate',
+          key: apiKey
+        })
+        if (region) params.set('regionCode', region)
+
+        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?${params}`, { cache: 'no-store' })
+        const data = await response.json()
+        if (!response.ok) throw new Error(data.error?.message || 'Unable to search YouTube.')
+
+        const results = (data.items || [])
+          .filter(item => item.id?.videoId)
+          .map(item => ({
+            id: item.id.videoId,
+            youtubeId: item.id.videoId,
+            title: decodeHtmlEntities(item.snippet.title),
+            channel: decodeHtmlEntities(item.snippet.channelTitle),
+            category: 'Entertainment',
+            image: item.snippet.thumbnails.high?.url || item.snippet.thumbnails.medium?.url || item.snippet.thumbnails.default?.url,
+            views: '0'
+          }))
+
+        if (!cancelled) {
+          setYoutubeVideos(results)
+          setLastUpdated(new Date())
+        }
+      } catch (err) {
+        if (!cancelled) setError(err.message || 'Something went wrong.')
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+
+    const query = search.trim()
+    if (query.length >= 2) {
+      searchTimer = setTimeout(() => fetchSearchResults(query), 650)
+    } else if (query.length === 0) {
+      fetchTrending()
+      refreshTimer = setInterval(fetchTrending, REFRESH_INTERVAL)
+    } else {
+      setLoading(false)
+      setError('')
+      if (query.length === 1) setYoutubeVideos([])
+    }
+
+    return () => {
+      cancelled = true
+      clearTimeout(searchTimer)
+      clearInterval(refreshTimer)
+    }
+  }, [region, search, refreshToken])
+
+  const toggleFavorite = video => {
+    setFavorites(current =>
+      current.includes(video.id)
+        ? current.filter(id => id !== video.id)
+        : [...current, video.id]
+    )
   }
 
-  .hero {
-    min-height: 430px;
+  const isSearching = search.trim().length >= 2
+  const filteredVideos = youtubeVideos.filter(video => {
+    const matchesCategory = isSearching || category === 'All' || video.category === category
+    const matchesPage = page !== 'My List' || favorites.includes(video.id)
+    return matchesCategory && matchesPage
+  })
+
+  const openPage = nextPage => {
+    setPage(nextPage)
+    setCategory('All')
+    setSearch('')
   }
 
-  .main-content {
-    padding-left: 5%;
-    padding-right: 5%;
+  const handleSearch = event => {
+    setSearch(event.currentTarget.value)
+    setCategory('All')
   }
+
+  const handleRefresh = () => setRefreshToken(current => current + 1)
+
+  return (
+    <div class="app">
+      <header class="navbar">
+        <button class="logo" onClick={() => openPage('Home')}>NEX<span>VID</span></button>
+        <nav class="nav-links">
+          <button class={page === 'Home' ? 'nav-active' : ''} onClick={() => openPage('Home')}>Home</button>
+          <button class={page === 'Trending' ? 'nav-active' : ''} onClick={() => openPage('Trending')}>Trending</button>
+          <button class={page === 'My List' ? 'nav-active' : ''} onClick={() => openPage('My List')}>My List</button>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="hero-content">
+          <p class="hero-label">YOUR VIDEO WORLD</p>
+          <h1>One Place.<br /><span>Endless Videos.</span></h1>
+          <p class="hero-description">Discover trending videos from around the world. Find what you love and watch in one place.</p>
+          <button class="hero-button" onClick={() => document.getElementById('videos')?.scrollIntoView({ behavior: 'smooth' })}>Explore Videos</button>
+        </div>
+      </section>
+
+      <main id="videos" class="main-content">
+        <div class="section-top">
+          <div>
+            <p class="section-label">DISCOVER</p>
+            <h2>{page === 'My List' ? 'My List' : page === 'Trending' ? 'Trending Videos' : isSearching ? 'Search Results' : 'Latest Videos'}</h2>
+          </div>
+          <div class="region-selector">
+            <label for="region">Region</label>
+            <select id="region" value={region} onChange={event => setRegion(event.currentTarget.value)}>
+              {regions.map(item => <option value={item.code}>{item.name}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div class="search-box">
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <circle cx="10.8" cy="10.8" r="6.8"></circle>
+              <path d="m16 16 5 5"></path>
+            </svg>
+          </span>
+          <input type="search" placeholder="Search any video on YouTube..." value={search} onInput={handleSearch} />
+        </div>
+
+        <div class="refresh-row">
+          <p class="updated-label">
+            {isSearching ? 'YouTube search results' : lastUpdated ? `Last updated: ${lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : 'Waiting for videos...'}
+          </p>
+          {!isSearching && (
+            <button class="refresh-button" onClick={handleRefresh} disabled={loading}>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M20 7v5h-5"></path>
+                <path d="M19 12a7.5 7.5 0 1 1-2-5.1L20 12"></path>
+              </svg>
+              {loading ? 'Refreshing...' : 'Refresh videos'}
+            </button>
+          )}
+        </div>
+
+        <div class="categories">
+          {categories.map(item => (
+            <button class={category === item ? 'category selected' : 'category'} onClick={() => setCategory(item)}>{item}</button>
+          ))}
+        </div>
+
+        {search.trim().length === 1 && !loading && (
+          <div class="empty-message"><h3>Keep typing</h3><p>Enter at least 2 characters to search YouTube.</p></div>
+        )}
+
+        {loading && (
+          <div class="status-message"><div class="loader"></div><p>{isSearching ? 'Searching YouTube...' : 'Loading trending videos...'}</p></div>
+        )}
+
+        {!loading && error && (
+          <div class="error-message">
+            <h3>Unable to load videos</h3>
+            <p>{error}</p>
+            <button onClick={handleRefresh}>Try Again</button>
+            <p class="error-note">If this happens on the deployed website, check the YouTube API environment variable and API restrictions in Google Cloud.</p>
+          </div>
+        )}
+
+        {!loading && !error && filteredVideos.length > 0 && (
+          <div class="video-grid">
+            {filteredVideos.map(video => (
+              <article class="video-card" key={video.id}>
+                <div class="thumbnail" style={{ backgroundImage: `url("${video.image}")` }}>
+                  <button class="play-icon" aria-label={`Play ${video.title}`} onClick={() => setSelectedVideo(video)}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10-6.5z"></path></svg>
+                  </button>
+                  <button class={favorites.includes(video.id) ? 'heart favorited' : 'heart'} aria-label={favorites.includes(video.id) ? 'Remove from My List' : 'Add to My List'} onClick={() => toggleFavorite(video)}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 8.8c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.4a4.7 4.7 0 0 1 8.8 2.4Z"></path></svg>
+                  </button>
+                </div>
+                <div class="video-info">
+                  <span class="video-category">{video.category}</span>
+                  <h3>{video.title}</h3>
+                  <p>{video.channel}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+
+        {!loading && !error && filteredVideos.length === 0 && search.trim().length !== 1 && (
+          <div class="empty-message">
+            <h3>No videos found</h3>
+            <p>{page === 'My List' ? 'Add videos to My List by tapping the heart icon.' : isSearching ? 'Try different keywords.' : 'Try another search or select a different category.'}</p>
+          </div>
+        )}
+      </main>
+
+      <footer class="footer">
+        <h2>NEX<span>VID</span></h2>
+        <p>Discover. Explore. Watch.</p>
+        <small>Video content is provided by YouTube. NEXVID does not host or own the videos.</small>
+      </footer>
+
+      {selectedVideo && (
+        <div class="player-overlay" onClick={event => { if (event.target === event.currentTarget) setSelectedVideo(null) }}>
+          <div class="player-modal">
+            <button class="close-player" onClick={() => setSelectedVideo(null)} aria-label="Close player">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+            </button>
+            <h2>{selectedVideo.title}</h2>
+            <div class="player-frame">
+              <iframe
+                src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1&playsinline=1&rel=0`}
+                title={selectedVideo.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <p class="player-channel">{selectedVideo.channel}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  )
 }
 
-/* MOBILE */
-
-@media (max-width: 600px) {
-  .navbar {
-    height: 70px;
-    padding: 0 18px;
-  }
-
-  .logo {
-    font-size: 24px;
-  }
-
-  .nav-links {
-    gap: 15px;
-  }
-
-  .nav-links button {
-    font-size: 12px;
-  }
-
-  .hero {
-    min-height: 440px;
-    padding: 65px 25px;
-    background-position: center;
-  }
-
-  .hero h1 {
-    font-size: 43px;
-    letter-spacing: -1.8px;
-  }
-
-  .hero-description {
-    font-size: 14px;
-  }
-
-  .main-content {
-    padding: 48px 18px 65px;
-  }
-
-  .section-top {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 17px;
-  }
-
-  .section-top h2 {
-    font-size: 26px;
-  }
-
-  .region-selector {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .region-selector select {
-    flex: 1;
-    max-width: 220px;
-  }
-
-  .search-box {
-    height: 46px;
-  }
-
-  .categories {
-    gap: 9px;
-  }
-
-  .category {
-    padding: 10px 17px;
-  }
-
-  .video-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 15px 11px;
-  }
-
-  .video-info {
-    padding: 10px;
-  }
-
-  .video-info h3 {
-    font-size: 12px;
-  }
-
-  .video-info p {
-    font-size: 10px;
-  }
-
-  .video-category {
-    font-size: 9px;
-  }
-
-  .play-icon {
-    width: 42px;
-    height: 42px;
-    font-size: 15px;
-  }
-
-  .heart {
-    top: 7px;
-    right: 7px;
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
-  }
-
-  .player-modal {
-    padding: 17px;
-  }
-
-  .player-modal h2 {
-    font-size: 15px;
-  }
-
-  .close-player {
-    top: 8px;
-    right: 8px;
-    width: 30px;
-    height: 30px;
-  }
-}
-
-@media (max-width: 360px) {
-  .nav-links {
-    gap: 9px;
-  }
-
-  .nav-links button {
-    font-size: 11px;
-  }
-
-  .hero h1 {
-    font-size: 37px;
-  }
-
-  .video-grid {
-    gap: 12px 8px;
-  }
-}
+export default App
