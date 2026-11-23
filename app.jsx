@@ -18,12 +18,30 @@ const categories = [
   'Education', 'Documentary', 'Entertainment'
 ]
 
+// YouTube category IDs (from videos.list -> snippet.categoryId).
+// Documentary is not a dedicated YouTube category, so it is detected from metadata keywords.
 const categoryMap = {
-  '1': 'Movies', '2': 'Entertainment', '10': 'Music', '15': 'Entertainment',
-  '17': 'Sports', '18': 'Movies', '19': 'Entertainment', '20': 'Gaming',
-  '22': 'Entertainment', '23': 'Entertainment', '24': 'Entertainment',
-  '25': 'News', '26': 'Education', '27': 'Education', '28': 'Technology',
-  '29': 'Documentary', '30': 'Movies', '35': 'Documentary'
+  '1': 'Movies',          // Film & Animation
+  '10': 'Music',
+  '17': 'Sports',
+  '20': 'Gaming',
+  '22': 'Entertainment',  // People & Blogs
+  '23': 'Entertainment',  // Comedy
+  '24': 'Entertainment',
+  '25': 'News',           // News & Politics
+  '26': 'Entertainment',  // Howto & Style
+  '27': 'Education',
+  '28': 'Technology'
+}
+
+const getVideoCategory = video => {
+  const text = `${video.title || ''} ${video.description || ''} ${(video.tags || []).join(' ')}`.toLowerCase()
+  const documentaryTerms = [
+    'documentary', 'documentaries', 'docuseries', 'true story',
+    'investigation', 'historical footage', 'wildlife', 'nature film'
+  ]
+  if (documentaryTerms.some(term => text.includes(term))) return 'Documentary'
+  return categoryMap[video.categoryId] || 'Entertainment'
 }
 
 const REFRESH_INTERVAL = 30 * 60 * 1000
@@ -60,6 +78,74 @@ function App() {
       return apiKey
     }
 
+    async function addActualCategories(items, apiKey) {
+      const validItems = items.filter(item => item.id?.videoId)
+      const ids = validItems.map(item => item.id.videoId)
+      if (ids.length === 0) return []
+
+      // videos.list accepts at most 50 video IDs per request.
+      const detailsById = new Map()
+      for (let start = 0; start < ids.length; start += 50) {
+        const batchIds = ids.slice(start, start + 50)
+        try {
+          const detailsParams = new URLSearchParams({
+            part: 'snippet',
+            id: batchIds.join(','),
+            key: apiKey
+          })
+          const detailsResponse = await fetch(
+            `https://www.googleapis.com/youtube/v3/videos?${detailsParams}`,
+            { cache: 'no-store' }
+          )
+          if (detailsResponse.ok) {
+            const detailsData = await detailsResponse.json()
+            for (const item of detailsData.items || []) {
+              detailsById.set(item.id, item.snippet || {})
+            }
+          } else {
+            console.warn('YouTube category lookup failed; using fallback categories for this batch.')
+          }
+        } catch (detailsError) {
+          console.warn('YouTube category lookup unavailable; using fallback categories for this batch.', detailsError)
+        }
+      }
+
+      return validItems.map(item => {
+        const videoId = item.id.videoId
+        const snippet = item.snippet || {}
+        const details = detailsById.get(videoId) || {}
+        const category = getVideoCategory({
+          categoryId: details.categoryId,
+          title: snippet.title,
+          description: details.description || snippet.description,
+          tags: details.tags || []
+        })
+
+        return {
+          id: videoId,
+          youtubeId: videoId,
+          title: decodeHtmlEntities(snippet.title),
+          channel: decodeHtmlEntities(snippet.channelTitle),
+          category,
+          image: snippet.thumbnails?.high?.url || snippet.thumbnails?.medium?.url || snippet.thumbnails?.default?.url,
+          views: '0'
+        }
+      })
+    }
+
+    async function fetchVideos(params) {
+      params.set('maxResults', '50')
+      const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?${params}`,
+        { cache: 'no-store' }
+      )
+      const data = await response.json()
+      if (!response.ok) {
+        throw new Error(data.error?.message || 'Unable to load YouTube videos.')
+      }
+      return data.items || []
+    }
+
     async function fetchTrending() {
       setLoading(true)
       setError('')
@@ -71,30 +157,14 @@ function App() {
           part: 'snippet',
           type: 'video',
           order: 'date',
-          maxResults: '24',
           publishedAfter: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-          key: apiKey,
-          _refresh: String(Date.now())
+          key: apiKey
         })
         if (region) params.set('regionCode', region)
 
-        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?${params}`, {
-          cache: 'no-store'
-        })
-        const data = await response.json()
-        if (!response.ok) throw new Error(data.error?.message || 'Unable to load recent YouTube videos.')
-
-        const results = (data.items || [])
-          .filter(item => item.id?.videoId)
-          .map(item => ({
-            id: item.id.videoId,
-            youtubeId: item.id.videoId,
-            title: decodeHtmlEntities(item.snippet.title),
-            channel: decodeHtmlEntities(item.snippet.channelTitle),
-            category: 'Entertainment',
-            image: item.snippet.thumbnails.high?.url || item.snippet.thumbnails.medium?.url || item.snippet.thumbnails.default?.url,
-            views: '0'
-          }))
+        // One Search API request returns up to 50 videos, helping conserve daily quota.
+        const items = await fetchVideos(params)
+        const results = await addActualCategories(items, apiKey)
 
         if (!cancelled) {
           setYoutubeVideos(results)
@@ -117,28 +187,14 @@ function App() {
           part: 'snippet',
           type: 'video',
           q: query,
-          maxResults: '24',
           order: 'relevance',
           safeSearch: 'moderate',
           key: apiKey
         })
         if (region) params.set('regionCode', region)
 
-        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?${params}`, { cache: 'no-store' })
-        const data = await response.json()
-        if (!response.ok) throw new Error(data.error?.message || 'Unable to search YouTube.')
-
-        const results = (data.items || [])
-          .filter(item => item.id?.videoId)
-          .map(item => ({
-            id: item.id.videoId,
-            youtubeId: item.id.videoId,
-            title: decodeHtmlEntities(item.snippet.title),
-            channel: decodeHtmlEntities(item.snippet.channelTitle),
-            category: 'Entertainment',
-            image: item.snippet.thumbnails.high?.url || item.snippet.thumbnails.medium?.url || item.snippet.thumbnails.default?.url,
-            views: '0'
-          }))
+        const items = await fetchVideos(params)
+        const results = await addActualCategories(items, apiKey)
 
         if (!cancelled) {
           setYoutubeVideos(results)
@@ -268,7 +324,7 @@ function App() {
         )}
 
         {loading && (
-          <div class="status-message"><div class="loader"></div><p>{isSearching ? 'Searching YouTube...' : 'Loading trending videos...'}</p></div>
+          <div class="status-message"><div class="loader"></div><p>{isSearching ? 'Searching YouTube...' : 'Loading latest videos...'}</p></div>
         )}
 
         {!loading && error && (
