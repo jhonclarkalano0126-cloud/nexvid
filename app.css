@@ -808,3 +808,58 @@ button {
     gap: 12px 8px;
   }
 }
+
+/* FINAL RESPONSIVE POLISH */
+.refresh-row {
+  flex-wrap: wrap;
+}
+
+.player-overlay {
+  overflow-y: auto;
+}
+
+@media (max-width: 600px) {
+  .refresh-row {
+    align-items: flex-start;
+  }
+
+  .updated-label {
+    line-height: 1.5;
+  }
+
+  .refresh-button {
+    min-height: 36px;
+    padding: 8px 12px;
+  }
+
+  .player-overlay {
+    align-items: flex-start;
+    padding: 14px;
+  }
+
+  .player-modal {
+    margin: auto 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .navbar {
+    padding: 0 13px;
+  }
+
+  .nav-links {
+    gap: 7px;
+  }
+
+  .nav-links button {
+    font-size: 10px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .video-info h3 {
+    font-size: 11px;
+  }
+}
