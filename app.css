@@ -1,8 +1,7 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
 :root {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   color: #ffffff;
   background: #080808;
   font-synthesis: none;
@@ -96,11 +95,10 @@ button {
   padding: 90px 8%;
   display: flex;
   align-items: center;
-  background:
-    linear-gradient(90deg, rgba(0,0,0,0.96), rgba(0,0,0,0.58)),
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.96), rgba(0, 0, 0, 0.58)),
     linear-gradient(0deg, #080808 0%, transparent 45%),
-    url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1800&q=85')
-    center/cover no-repeat;
+    url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1800&q=85")
+      center/cover no-repeat;
 }
 
 .hero-content {
@@ -228,9 +226,22 @@ button {
   border-color: #ed1738;
 }
 
-.search-box span {
+.search-box .search-icon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
   color: #ed1738;
-  font-size: 25px;
+}
+
+.search-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .search-box input {
@@ -245,6 +256,56 @@ button {
 
 .search-box input::placeholder {
   color: #777;
+}
+
+/* REFRESH STATUS */
+
+.refresh-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin: -8px 0 22px;
+}
+
+.updated-label {
+  color: #999;
+  font-size: 12px;
+}
+
+.refresh-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 9px 14px;
+  border: 1px solid #ed1738;
+  border-radius: 7px;
+  background: #171717;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.refresh-button:hover:not(:disabled) {
+  background: #ed1738;
+}
+
+.refresh-button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.refresh-button svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* CATEGORIES */
@@ -316,10 +377,10 @@ button {
 }
 
 .thumbnail::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(0,0,0,0.5), transparent 55%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), transparent 55%);
   pointer-events: none;
 }
 
@@ -338,9 +399,14 @@ button {
   border-radius: 50%;
   background: rgba(237, 23, 56, 0.9);
   color: white;
-  font-size: 19px;
-  padding-left: 4px;
   transition: 0.2s;
+}
+
+.play-icon svg {
+  width: 23px;
+  height: 23px;
+  fill: currentColor;
+  margin-left: 3px;
 }
 
 .play-icon:hover {
@@ -355,12 +421,28 @@ button {
   z-index: 3;
   width: 37px;
   height: 37px;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0, 0, 0, 0.65);
   color: white;
-  font-size: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: 0.2s;
+}
+
+.heart svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.heart.favorited svg {
+  fill: currentColor;
 }
 
 .heart:hover,
@@ -499,7 +581,7 @@ button {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(0,0,0,0.92);
+  background: rgba(0, 0, 0, 0.92);
 }
 
 .player-modal {
@@ -530,7 +612,18 @@ button {
   border-radius: 50%;
   background: #252525;
   color: white;
-  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-player svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
 }
 
 .close-player:hover {
